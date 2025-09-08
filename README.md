@@ -1,5 +1,5 @@
 # fragments
-This repo is for the MTH525 course. This will serve as the main branch for all future labs and assignments.
+This repo is for the BTI525 course. This will serve as the main branch for all future labs and assignments.
 
 How to run lint: run "npm init @eslint/config@latest" to install latest version of lint
                  Go through each prompt options depending on your needs.
@@ -137,4 +137,5 @@ const server = stoppable(
 // Export our server instance so other parts of our code can access it if necessary.
 module.exports = server;
 #############################################################################################################################################################################################################################
+
 
