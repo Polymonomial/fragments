@@ -16,7 +16,7 @@ app.use(cors());
 app.use(compression());
 
 app.get('/', (req, res) => {
-  res.setheader('Cache-Control', 'no-cache');
+  res.setHeader('Cache-Control', 'no-cache');
   res.status(200).json({ status: 'ok', author, githuburl: 'https://github.com/Polymonomial/fragments.git', version });
 });
 
