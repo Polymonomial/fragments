@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const compression = require('compression');
+const passport = require('passport');
+const authenticate = require('./auth');
 
 const {author, version } = require('../package.json');
 
@@ -21,7 +23,10 @@ app.use(compression());
 // });
 
 app.use('/', require('./routes'));
-
+app.use(compression());
+passport.use(authenticate.strategy());
+app.use(passport.initialize());
+app.use('/',require('./routes'));
 app.use((req, res) => {
   res.status(404).json({ status: 'error', error: { code: 404, message: 'Not Found' } });
 });
