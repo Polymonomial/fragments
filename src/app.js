@@ -5,7 +5,7 @@ const compression = require('compression');
 const passport = require('passport');
 const authenticate = require('./auth');
 
-const {author, version } = require('../package.json');
+//const {author, version } = require('../package.json');
 
 const logger = require('./logger');
 const pino = require('pino-http')({ logger });
@@ -26,7 +26,7 @@ app.use('/', require('./routes'));
 app.use(compression());
 passport.use(authenticate.strategy());
 app.use(passport.initialize());
-app.use('/',require('./routes'));
+app.use('/', require('./routes'));
 app.use((req, res) => {
   res.status(404).json({ status: 'error', error: { code: 404, message: 'Not Found' } });
 });
@@ -34,20 +34,17 @@ app.use((req, res) => {
 app.use((err, req, res, next) => {
   const status = err.status || 500;
   const message = err.message || 'Unable to process request';
-  if(status > 499) {
-    logger.error({err}, `Error processing request`);
+  if (status > 499) {
+    logger.error({ err }, `Error processing request`);
   }
 
   res.status(status).json({
     status: 'error',
-    error:{
-        message,
-        code: status,
-    }
-  })
+    error: {
+      message,
+      code: status,
+    },
+  });
 });
 
 module.exports = app;
-
-
-
