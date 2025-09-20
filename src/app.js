@@ -31,7 +31,7 @@ app.use((req, res) => {
   res.status(404).json({ status: 'error', error: { code: 404, message: 'Not Found' } });
 });
 
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   const status = err.status || 500;
   const message = err.message || 'Unable to process request';
   if (status > 499) {
