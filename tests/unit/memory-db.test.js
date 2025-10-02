@@ -1,4 +1,4 @@
-const MemoryDB = require('../../src/model/data/memory/memory-db');
+const MemoryDB = require('../../src/model/data/memory/memory-db.js');
 
 describe('MemoryDB', () => {
   let db;
