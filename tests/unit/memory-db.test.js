@@ -48,7 +48,7 @@ describe('MemoryDB', () => {
     await db.put('b', 'c', { value: 3 });
     const result = await db.query('a');
     expect(Array.isArray(result)).toBe(true);
-    expect(result.length).toEqual([]);
+    expect(result).toEqual([]);
   });
 
   test('del() removes value put() into db', async () => {
