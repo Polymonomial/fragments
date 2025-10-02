@@ -84,4 +84,4 @@ class MemoryDB {
   }
 }
 
-module.export = MemoryDB;
+module.exports = MemoryDB;
