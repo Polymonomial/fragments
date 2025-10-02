@@ -43,6 +43,14 @@ class MemoryDB {
     db[primaryKey][secondaryKey] = value;
     return Promise.resolve();
   }
+
+  /**
+   * Queries the list of values (i.e., secondaryKeys) for the given primaryKey.
+   * Always returns an Array, even if no items are found.
+   * @param {string} primaryKey
+   * @returns {Promise<any[]>}
+   */
+
   query(primaryKey) {
     if (!validateKey(primaryKey)) {
       throw new Error(`The primary key you provided is invalid: primarykey =${primaryKey}`);
