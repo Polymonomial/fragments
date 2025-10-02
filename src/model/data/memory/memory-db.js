@@ -29,7 +29,20 @@ class MemoryDB {
    * @param {string} secondaryKey
    * @returns {Promise<void>}
    */
+  put(primaryKey, secondaryKey, value) {
+    if (!(validateKey(primaryKey) && validateKey(secondaryKey))) {
+      throw new Error(
+        `primaryKey and secondaryKey strings are required, got primaryKey=${primaryKey}, secondaryKey=${secondaryKey}`
+      );
+    }
 
+    const db = this.db;
+    // Make sure the `primaryKey` exists, or create
+    db[primaryKey] = db[primaryKey] || {};
+    // Add the `value` to the `secondaryKey`
+    db[primaryKey][secondaryKey] = value;
+    return Promise.resolve();
+  }
   query(primaryKey) {
     if (!validateKey(primaryKey)) {
       throw new Error(`The primary key you provided is invalid: primarykey =${primaryKey}`);
