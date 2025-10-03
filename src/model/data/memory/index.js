@@ -5,7 +5,7 @@ const metadata = new MemoryDB();
 
 function writeFragment(fragment) {
   const serialized = JSON.stringify(fragment);
-  return metadata.put(fragment.ownerid, 'metadata', fragment.id, serialized);
+  return metadata.put(fragment.ownerid, fragment.id, serialized);
 }
 
 async function readFragment(ownerid, fragmentid) {
