@@ -12,39 +12,39 @@ describe('memory db calls', () => {
   //   const metadata = new MemoryDB();
   // });
   test('writeFragment() returns nothing', async () => {
-    const result = await writeFragment({ ownerid: '114514', id: '1919810', testdata: [] });
+    const result = await writeFragment({ ownerId: '114514', id: '1919810', testdata: [] });
     expect(result).toBe(undefined);
   });
 
   test('writeFragment() correctely stores data', async () => {
     await writeFragment({
-      ownerid: '114514',
+      ownerId: '114514',
       id: '1919810',
       testdata: [1, 9, 1, 9, 8, 1, 0],
     });
     const results = await readFragment('114514', '1919810');
-    expect(results).toEqual({ ownerid: '114514', id: '1919810', testdata: [1, 9, 1, 9, 8, 1, 0] });
+    expect(results).toEqual({ ownerId: '114514', id: '1919810', testdata: [1, 9, 1, 9, 8, 1, 0] });
   });
 
   test(`writeFragment() returns a promise`, async () => {
-    const result = writeFragment({ ownerid: '114514', id: '1919810', testdata: [] });
+    const result = writeFragment({ ownerId: '114514', id: '1919810', testdata: [] });
     expect(result).toBeInstanceOf(Promise);
   });
 
   test(`readFragment() returns undefined for unknown fragment`, async () => {
-    await writeFragment({ ownerid: '114514', id: '1919810', testdata: 'yjsp' });
+    await writeFragment({ ownerId: '114514', id: '1919810', testdata: 'yjsp' });
     const result = await readFragment('114513', '1919812');
     expect(result).toBe(undefined);
   });
 
   test(`readFragment() returns the correct fragment`, async () => {
-    await writeFragment({ ownerid: '114514', id: '1919810', testdata: 'yjsp' });
+    await writeFragment({ ownerId: '114514', id: '1919810', testdata: 'yjsp' });
     const result = await readFragment('114514', '1919810');
-    expect(result).toEqual({ ownerid: '114514', id: '1919810', testdata: 'yjsp' });
+    expect(result).toEqual({ ownerId: '114514', id: '1919810', testdata: 'yjsp' });
   });
 
   test(`readFragment() returns a promise`, async () => {
-    await writeFragment({ ownerid: '114514', id: '1919810', testdata: 'yjsp' });
+    await writeFragment({ ownerId: '114514', id: '1919810', testdata: 'yjsp' });
     const result = readFragment('114514', '1919810');
     expect(result).toBeInstanceOf(Promise);
   });
