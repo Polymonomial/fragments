@@ -6,6 +6,7 @@ const express = require('express');
 const { version, author } = require('../../package.json');
 const { authenticate } = require('../auth');
 const { createSuccessResponse } = require('../response');
+
 // Create a router that we can use to mount our API
 const router = express.Router();
 
@@ -28,7 +29,7 @@ router.get('/', (req, res) => {
     createSuccessResponse({
       author,
       // Use your own GitHub URL for this!
-      githubUrl: 'https://github.com/Polymonomial/fragments.git',
+      githuburl: 'https://github.com/Polymonomial/fragments.git',
       version,
     })
   );
