@@ -25,7 +25,7 @@ const rawBody = () =>
   });
 // Define our first route, which will be: GET /v1/fragments
 router.get('/fragments/:id', require('./get'));
-router.get('/fragments/', require('./list'));
+router.get('/fragments', require('./list'));
 // Other routes (POST, DELETE, etc.) will go here later on...
 router.post('/fragments', rawBody(), require('./post'));
 

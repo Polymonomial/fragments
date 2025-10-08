@@ -1,21 +1,19 @@
 const request = require('supertest');
 const app = require('../../src/app');
 describe('POST /v1/fragments', () => {
-  // Using a valid username/password pair should give a success result with a .fragments array
-  // let jwt;
-  // beforeAll(async () => {
-  //   jwt = await getCognitoIdToken({
-  //     username: 'bchang16@myseneca.ca',
-  //     password: '6ABrendan08.',
-  //   });
-  // });
-  test('post with basical auth returns 200', async () => {
+  test('GET /v1/fragments route exists', async () => {
+    const res = await request(app).get('/v1/fragments');
+    console.log(res.statusCode, res.body);
+  });
+  test('post with basic auth returns 200', async () => {
     const res = await request(app)
       .post('/v1/fragments')
       .auth('user1@email.com', 'password1')
       .send({ type: 'text/plain', data: 'hello' });
-    expect(res.body.status).toBe('ok');
+    console.log(`this is res: `, res.body);
+
     expect(res.statusCode).toBe(201);
+    expect(res.body.status).toBe('ok');
   });
 
   test('post with no auth returns 401', async () => {

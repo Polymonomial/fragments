@@ -18,7 +18,7 @@ module.exports = (strategyName) => {
      */
     function callback(err, email) {
       // Something failed, let the the error handling middleware deal with it
-      console.log('email checker');
+      //console.log('email checker');
       if (err) {
         logger.warn({ err }, 'error authenticating user');
         return next(createErrorResponse(500, 'Unable to authenticate user'));
@@ -26,13 +26,13 @@ module.exports = (strategyName) => {
 
       // Not authorized, return a 401
       if (!email) {
-        console.log(`no email found`);
+        //console.log(`no email found`);
         return res.status(401).json(createErrorResponse(401, 'Unauthorized'));
       }
-      console.log(`email found: ${email}`);
+      //console.log(`email found: ${email}`);
       // Authorized. Hash the user's email, attach to the request, and continue
       req.user = hash(email);
-      console.log({ email, hash: req.user }, 'Authenticated user');
+      //console.log({ email, hash: req.user }, 'Authenticated user');
 
       // Call the next function in the middleware chain (e.g. your route handler)
       next();
