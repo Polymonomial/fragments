@@ -55,6 +55,7 @@ app.use((err, req, res, next) => {
       message,
     })
   );
+  next();
 });
 
 module.exports = app;
