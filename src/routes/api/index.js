@@ -6,11 +6,10 @@ const contentType = require('content-type');
  * The main entry-point for the v1 version of the fragments API.
  */
 const express = require('express');
-const authMiddleware = require('../../auth/auth-middleware');
 
 // Create a router on which to mount our API endpoints
 const router = express.Router();
-router.use(authMiddleware('bearer')); // Protect all /v1 routes
+//router.use(authMiddleware('bearer')); // Protect all /v1 routes
 const rawBody = () =>
   express.raw({
     inflate: true,

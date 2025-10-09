@@ -1,9 +1,10 @@
 const { Fragment } = require('../../model/fragment');
 module.exports = async (req, res) => {
   try {
+    console.log('get handler reached', req.user, req.params);
     const { id } = req.params;
     const ownerId = req.user;
-    // console.log(id);
+    //
     if (!id) {
       return res
         .status(400)
