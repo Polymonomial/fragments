@@ -1,18 +1,24 @@
 FROM node:24.7.0-alpine as dependencies
 
+WORKDIR /app
+
 LABEL maintainer="bchang16@myseneca.ca"
 
 LABEL description="Fragment Node.js Express Application"
 
 COPY package*.json ./
 
-RUN npm install
+#RUN npm install
 
 FROM node:24.7.0-alpine as runtime
 
 ENV PORT=8080 \ NPM_CONFIG_LOGLEVEL=warn \ NPM_CONFIG_COLOR=false
 
 WORKDIR /app
+
+COPY --from=dependencies /app/package*.json ./
+
+RUN npm ci --only=production
 
 COPY ./src ./src
 
