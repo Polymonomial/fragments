@@ -140,3 +140,6 @@ vite.config.ts.timestamp-*
 
 # SSH keys
 .ssh
+
+# Access tokens
+.accesstoken
