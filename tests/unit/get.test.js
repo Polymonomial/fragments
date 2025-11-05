@@ -33,5 +33,22 @@ describe('GET /v1/fragments', () => {
     expect(getRes.body.status).toBe('ok');
     expect(getRes.statusCode).toBe(200);
   });
+
+  // Using a valid username/password pair with specific fragment id should give a success result with a fragment object
+  test('authenticated users get specific fragment with given fragment id', async() => {
+    const postRes = await request(app)
+      .post('/v1/fragments')
+      .auth('user1@email.com', 'password1')
+      .send({ type: 'text/plain', data: 'hello' });
+    expect(postRes.statusCode).toBe(201);
+    expect(postRes.body.status).toBe('ok');
+    const fragmentId = postRes.body.data.id;
+    const getRes = await request(app)
+      .get(`/v1/fragments/${fragmentId}`)
+      .auth('user1@email.com', 'password1');
+    expect(getRes.body.status).toBe('ok');
+    expect(getRes.statusCode).toBe(200);
+    expect(getRes.body.data.id).toBe(fragmentId);
+  });
   // TODO: we'll need to add tests to check the contents of the fragments array later
 });
