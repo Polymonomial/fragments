@@ -132,24 +132,24 @@ class Fragment {
         return ['text/plain'];
       case 'text/markdown':
         return ['text/markdown', 'text/html', 'text/plain'];
-      // case 'text/html':
-      //   return ['text/html', 'text/plain'];
-      // case 'text/csv':
-      //   return ['text/csv', 'text/plain', 'application/json'];
-      // case 'application/json':
-      //   return ['application/json', 'text/plain', 'application/yml', 'application/yaml'];
-      // case 'application/yaml':
-      //   return ['application/yaml', 'plain/text'];
-      // case 'image/png':
-      //   return ['image/png', 'image/jpg', 'image/ webp', 'image/avif', 'image/gif'];
-      // case 'image/jpg':
-      //   return ['image/png', 'image/jpg', 'image/ webp', 'image/avif', 'image/gif'];
-      // case 'image/webp':
-      //   return ['image/png', 'image/jpg', 'image/ webp', 'image/avif', 'image/gif'];
-      // case 'image/avif':
-      //   return ['image/png', 'image/jpg', 'image/ webp', 'image/avif', 'image/gif'];
-      // case 'image/gif':
-      //   return ['image/png', 'image/jpg', 'image/ webp', 'image/avif', 'image/gif'];
+      case 'text/html':
+        return ['text/html', 'text/plain'];
+      case 'text/csv':
+        return ['text/csv', 'text/plain', 'application/json'];
+      case 'application/json':
+        return ['application/json', 'text/plain', 'application/yml', 'application/yaml'];
+      case 'application/yaml':
+        return ['application/yaml', 'plain/text'];
+      case 'image/png':
+        return ['image/png', 'image/jpg', 'image/ webp', 'image/avif', 'image/gif'];
+      case 'image/jpg':
+        return ['image/png', 'image/jpg', 'image/ webp', 'image/avif', 'image/gif'];
+      case 'image/webp':
+        return ['image/png', 'image/jpg', 'image/ webp', 'image/avif', 'image/gif'];
+      case 'image/avif':
+        return ['image/png', 'image/jpg', 'image/ webp', 'image/avif', 'image/gif'];
+      case 'image/gif':
+        return ['image/png', 'image/jpg', 'image/ webp', 'image/avif', 'image/gif'];
       default:
         return [];
     }

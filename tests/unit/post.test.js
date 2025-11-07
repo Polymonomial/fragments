@@ -44,6 +44,6 @@ describe('POST /v1/fragments', () => {
       .auth('user1@email.com', 'password1');
     expect(getRes.statusCode).toBe(200);
     expect(getRes.body.status).toBe('ok');
-    expect(getRes.body.data).toEqual('hello');
+    expect(getRes.body.data.data).toEqual('hello');
   });
 });

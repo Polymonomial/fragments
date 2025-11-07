@@ -7,10 +7,11 @@ module.exports = (req, res) => {
     let data;
     try {
       type = contentType.parse(req).type;
+      console.log('Parsed content type:', type);
       if (!type) {
         return res
-          .status(400)
-          .json({ status: 'error', error: { code: 400, message: 'Missing type' } });
+          .status(404)
+          .json({ status: 'error', error: { code: 404, message: 'Missing type' } });
       }
     } catch (err) {
       console.error('Unknown or invalid Content-Type:', req.header('Content-Type', ''), err);
@@ -19,11 +20,17 @@ module.exports = (req, res) => {
         error: { code: 415, message: 'Unsupported or invalid Content-Type' },
       });
     }
+    console.log('req.body type:', typeof req.body);
     if (typeof req.body === 'string') {
       data = req.body;
+    } else if (Buffer.isBuffer(req.body)) {
+      data = req.body;
+      data = data.toString('utf8');
     } else if (req.body && typeof req.body === 'object') {
       data = req.body.data;
     }
+
+    console.log('data received1:', data);
     if (!data) {
       return res
         .status(400)
