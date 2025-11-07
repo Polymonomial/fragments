@@ -82,6 +82,7 @@ class Fragment {
   getData() {
     // TODO
     const data = readFragmentdata(this.ownerId, this.id).then((datas) => {
+      console.log('data retrieved in getData():', datas);
       return Buffer.from(datas);
     });
     return data;

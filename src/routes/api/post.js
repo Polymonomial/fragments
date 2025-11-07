@@ -32,6 +32,7 @@ module.exports = (req, res) => {
     const fragment = new Fragment({ ownerId: req.user, type, size: Buffer.byteLength(data) });
     // Save the fragment to the database
     fragment.save();
+    fragment.setData(data);
     // Respond with the created fragment
     // console.log('fragment:', fragment);
     res.status(201).json({ status: 'ok', data: fragment });
