@@ -7,6 +7,7 @@ module.exports = async (req, res) => {
     let { id } = req.params;
     const ownerId = req.user;
     const ext = path.extname(req.path);
+
     if (ext) {
       id = id.slice(0, -ext.length);
     }
@@ -22,7 +23,10 @@ module.exports = async (req, res) => {
         .status(404)
         .json({ status: 'error', error: { code: 404, message: 'Fragment not found!' } });
     }
-
+    if (req.originalUrl.endsWith('/info')) {
+      console.log('info endpoint reached');
+      return res.status(200).json({ status: 'ok', data: fragment });
+    }
     if (ext === '.md' && fragment.mimeType === 'text/markdown') {
       const markdownData = await fragment.getData();
       console.log('fkoff');
@@ -48,9 +52,6 @@ module.exports = async (req, res) => {
         },
       });
     }
-    // if (req.oringinalUrl.endsWith('/info')) {
-    //   return res.status(200).json({ status: 'ok', data: fragment });
-    // }
   } catch (error) {
     console.error('Error fetching fragment:', error);
     res

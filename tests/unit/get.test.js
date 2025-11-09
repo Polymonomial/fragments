@@ -74,5 +74,23 @@ describe('GET /v1/fragments', () => {
     expect(getRes.body.data.data.toString()).toBe('<h1>hello</h1>');
     console.log(getRes.body.data);
   });
+
+  test('authenticated users get specific fragment with given fragment id with /info sub-route that gives metadata', async () => {
+    const postRes = await request(app)
+      .post('/v1/fragments')
+      .auth('user1@email.com', 'password1')
+      .send({ type: 'text/plain', data: 'hello' });
+    expect(postRes.statusCode).toBe(201);
+    expect(postRes.body.status).toBe('ok');
+    const fragmentId = postRes.body.data.id;
+    const getRes = await request(app)
+      .get(`/v1/fragments/${fragmentId}/info`)
+      .auth('user1@email.com', 'password1');
+    expect(getRes.body.status).toBe('ok');
+    expect(getRes.statusCode).toBe(200);
+    console.log('Retrieved freg:', getRes.body.data);
+    expect(getRes.body.data.id).toBe(fragmentId);
+    console.log(getRes.body.data);
+  });
   // TODO: we'll need to add tests to check the contents of the fragments array later
 });
