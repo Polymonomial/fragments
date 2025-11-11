@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
       return res.status(200).json({ status: 'ok', data: fragments });
     } catch (error) {
       console.error('Error fetching fragment:', error);
-      res
+      return res
         .status(500)
         .json({ status: 'error', error: { code: 500, message: 'idk, something broke' } });
     }
