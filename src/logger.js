@@ -1,7 +1,5 @@
-
-
 const options = { levels: process.env.LOG_LEVEL || `info` };
-if (options.level === 'debug') {
+if (options.level === 'test') {
   // https://github.com/pinojs/pino-pretty
   options.transport = {
     target: 'pino-pretty',

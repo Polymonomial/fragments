@@ -6,12 +6,21 @@ module.exports = (req, res) => {
     let type;
     let data;
     try {
-      type = contentType.parse(req).type;
+      const parsed = contentType.parse(req);
+      const ptype = parsed.type;
+      const charset = parsed.parameters.charset;
+      type = charset ? `${ptype};charset=${charset}` : ptype;
       console.log('Parsed content type:', type);
       if (!type) {
         return res
           .status(404)
           .json({ status: 'error', error: { code: 404, message: 'Missing type' } });
+      }
+      if (!Fragment.isSupportedType(type)) {
+        return res.status(415).json({
+          status: 'error',
+          error: { code: 415, message: `Unsupported type: ${type}` },
+        });
       }
     } catch (err) {
       console.error('Unknown or invalid Content-Type:', req.header('Content-Type', ''), err);
@@ -42,6 +51,9 @@ module.exports = (req, res) => {
     fragment.setData(data);
     // Respond with the created fragment
     // console.log('fragment:', fragment);
+    const base = `${req.protocol}://${req.get('host')}`;
+    const location = `${base}/v1/fragments/${fragment.id}`;
+    res.set('Location', location);
     res.status(201).json({ status: 'ok', data: fragment });
   } catch (error) {
     console.error('Error creating fragment:', error);
