@@ -8,7 +8,7 @@
     "test": "jest -c jest.config.js --runInBand --detectOpenHandles --",
     "coverage": "jest -c jest.config.js --runInBand --coverage",
     "lint": "eslint \"./src/**/*.js\" \"tests/**/*.js\"",
-    "start": "cross-env NODE_ENV=production node src/index.js",
+    "start": "node src/index.js",
     "dev": "LOG_LEVEL=debug cross-env NODE_ENV=test nodemon ./src/index.js --watch src",
     "debug": "LOG_LEVEL=debug cross-env NODE_ENV=test nodemon --inspect=0.0.0.0:9229 ./src/index.js --watch src",
     "test:integration": "hurl --test --variables-file env.hurl --glob \"tests/integration/**/*.hurl\""
