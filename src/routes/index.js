@@ -1,7 +1,7 @@
 // src/routes/index.js
 
 const express = require('express');
-
+const { hostname } = require('os');
 // version and author from package.json
 const { version, author } = require('../../package.json');
 const { authenticate } = require('../auth');
@@ -31,6 +31,7 @@ router.get('/', (req, res) => {
       // Use your own GitHub URL for this!
       githuburl: 'https://github.com/Polymonomial/fragments.git',
       version,
+      hostname: hostname(),
     })
   );
 });
