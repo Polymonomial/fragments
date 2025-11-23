@@ -14,7 +14,7 @@
 //   );
 // }
 
-if (process.env.HTPASSWD_FILE && process.env.NODE_ENV !== 'production') {
+if (process.env.HTPASSWD_FILE && process.env.NODE_ENV === 'test') {
   console.log('Using Basic auth');
   module.exports = require('./basic-auth');
 }
