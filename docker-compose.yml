@@ -14,6 +14,7 @@ services:
       - API_URL=http://localhost:8080
       # Use Basic Auth (for running tests, CI)
       - HTPASSWD_FILE=tests/.htpasswd
+      - NODE_ENV=test
       # Use the LOG_LEVEL set in the host environment, or default to info
       - LOG_LEVEL=${LOG_LEVEL:-info}
       - AWS_REGION=us-east-1
@@ -27,6 +28,14 @@ services:
       # something else is defined in the env.
       - AWS_S3_BUCKET_NAME=${AWS_S3_BUCKET_NAME:-fragments}
       - AWS_DYNAMODB_TABLE_NAME=${AWS_DYNAMODB_TABLE_NAME:-fragments}
+      # aws cognito_pool_id and cognito_client_id can be left blank for local testing
+      - AWS_COGNITO_POOL_ID=${AWS_COGNITO_POOL_ID:-}
+      - AWS_COGNITO_CLIENT_ID=${AWS_COGNITO_CLIENT_ID:-}
+        # 🔑 Dummy credentials for LocalStack
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_SESSION_TOKEN=test
+
     ports:
       - '8080:8080'
   # DynamoDB Local, see: https://hub.docker.com/r/amazon/dynamodb-local

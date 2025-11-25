@@ -1,4 +1,4 @@
-# tests/integration/post-fragments.hurl
+#S3 POST test
 # Authenticated POST to /v1/fragments
 POST http://localhost:8080/v1/fragments
 # We're sending a plain text fragment
@@ -7,7 +7,7 @@ Content-Type: text/plain
 [BasicAuth]
 user1@email.com:password1
 # Body of the request goes in ```...``` when it's a string
-`This is a fragment!`
+`hello s3!`
 
 # 1. We expect to get back an HTTP 201
 HTTP/1.1 201
@@ -25,8 +25,8 @@ jsonpath "$.data.ownerId" matches "^[0-9a-fA-F]+$"
 jsonpath "$.data.created" isString
 jsonpath "$.data.updated" isString
 jsonpath "$.data.type" == "text/plain"
-# 19 is the length of our fragment data: 'This is a fragment!'
-jsonpath "$.data.size" == 20
+# 19 is the length of our fragment data: 'hello s3!'
+jsonpath "$.data.size" == 10
 # Capture the Location URL into a variable named `url`
 [Captures]
 url: header "Location"
@@ -38,6 +38,20 @@ user1@email.com:password1
 
 HTTP/1.1 200
 Content-Type: application/json; charset=utf-8
-Content-Length: 90
+Content-Length: 79
 [Asserts]
-body == `{"status":"ok","data":{"contentType":"text/plain","size":19,"data":"This is a fragment!"}}`
+body == `{"status":"ok","data":{"contentType":"text/plain","size":9,"data":"hello s3!"}}`
+
+#3. Try to DELETE teh fragment we just posted by its `url`
+DELETE {{url}}
+[BasicAuth]
+user1@email.com:password1
+
+HTTP/1.1 200
+
+# 4. Try to GET the fragment we just deleted
+GET {{url}}
+[BasicAuth]
+user1@email.com:password1
+
+HTTP/1.1 404

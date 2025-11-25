@@ -51,6 +51,7 @@ class Fragment {
     // TODO
     // TIP: make sure you properly re-create a full Fragment instance after getting from db.
     const fragmentData = await readFragment(ownerid, id);
+    if (!fragmentData) return null;
     return new Fragment(fragmentData);
   }
 

@@ -8,7 +8,8 @@
     "test": "jest -c jest.config.js --runInBand --detectOpenHandles --",
     "coverage": "jest -c jest.config.js --runInBand --coverage",
     "lint": "eslint \"./src/**/*.js\" \"tests/**/*.js\"",
-    "start": "LOG_LEVEL=info NODE_ENV=production node src/index.js",
+    "start": "LOG_LEVEL=info node src/index.js",
+    "startLOCO": "LOG_LEVEL=info NODE_ENV=production node src/index.js",
     "dev": "LOG_LEVEL=debug cross-env NODE_ENV=test nodemon ./src/index.js --watch src",
     "debug": "LOG_LEVEL=debug cross-env NODE_ENV=test nodemon --inspect=0.0.0.0:9229 ./src/index.js --watch src",
     "test:integration": "hurl --test --variables-file env.hurl --glob \"tests/integration/**/*.hurl\""
@@ -31,6 +32,7 @@
     "supertest": "^7.1.4"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.937.0",
     "aws-jwt-verify": "^5.1.0",
     "aws-sdk": "^2.1692.0",
     "compression": "^1.8.1",

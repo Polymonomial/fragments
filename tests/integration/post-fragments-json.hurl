@@ -23,4 +23,4 @@ HTTP/1.1 200
 Content-Type: application/json; charset=utf-8
 Content-Length: 96
 [Asserts]
-body == `{"status":"ok","data":{"contentType":"application/json","size":20,"data":"This is a fragment!"}}`
+body == `{"status":"ok","data":{"contentType":"application/json","size":19,"data":"This is a fragment!"}}`
