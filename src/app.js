@@ -27,7 +27,7 @@ app.use(
 );
 // Handle preflight explicitly:
 app.options(
-  '*',
+  /.*/,
   cors({
     origin: allowedOrigin,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
