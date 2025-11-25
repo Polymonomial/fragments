@@ -26,7 +26,7 @@
         },
         {
           "name": "AWS_S3_BUCKET_NAME",
-          "value": "bchang16-fragments"
+          "value": "debug"
         }
       ],
       "essential": true,
