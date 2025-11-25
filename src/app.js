@@ -13,9 +13,27 @@ const app = express();
 
 app.use(pino);
 app.use(helmet());
-app.use(cors());
+//app.use(cors());
 app.use(compression());
-
+const allowedOrigin = 'http://localhost:1234';
+app.use(
+  cors({
+    origin: allowedOrigin,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    exposedHeaders: ['Location'], // So your frontend can read Location on 201 response
+    credentials: false, // You don't use cookies, so leave this off
+  })
+);
+// Handle preflight explicitly:
+app.options(
+  '*',
+  cors({
+    origin: allowedOrigin,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  })
+);
 // app.get('/', (req, res) => {
 //   res.setHeader('Cache-Control', 'no-cache');
 //   res.status(200).json({
