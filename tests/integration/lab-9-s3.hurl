@@ -26,7 +26,7 @@ jsonpath "$.data.created" isString
 jsonpath "$.data.updated" isString
 jsonpath "$.data.type" == "text/plain"
 # 19 is the length of our fragment data: 'hello s3!'
-jsonpath "$.data.size" == 10
+jsonpath "$.data.size" == 9
 # Capture the Location URL into a variable named `url`
 [Captures]
 url: header "Location"

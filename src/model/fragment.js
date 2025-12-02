@@ -101,7 +101,7 @@ class Fragment {
     // TODO
     // TIP: make sure you update the metadata whenever you change the data, so they match
     const strDATA = data.toString();
-    this.size++;
+    this.size = Buffer.byteLength(strDATA);
     await writeFragmentdata(this.ownerId, this.id, strDATA);
     this.save();
   }

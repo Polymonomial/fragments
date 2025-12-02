@@ -1,6 +1,6 @@
 const { Fragment } = require('../../model/fragment');
 const contentType = require('content-type');
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
   //console.log('POST handler reached', req.user, req.body);
   try {
     let type;
@@ -49,8 +49,8 @@ module.exports = (req, res) => {
     }
     const fragment = new Fragment({ ownerId: req.user, type, size: Buffer.byteLength(data) });
     // Save the fragment to the database
-    fragment.save();
-    fragment.setData(data);
+    await fragment.save();
+    await fragment.setData(data);
     // Respond with the created fragment
     // console.log('fragment:', fragment);
     const base = `${req.protocol}://${req.get('host')}`;
