@@ -27,6 +27,14 @@
         {
           "name": "AWS_S3_BUCKET_NAME",
           "value": "bchang16-fragments"
+        },
+        {
+          "name": "AWS_REGION",
+          "value": "us-east-1"
+        },
+        {
+          "name": "DYNAMODB_TABLE_NAME",
+          "value": "Fragments"
         }
       ],
       "essential": true,
