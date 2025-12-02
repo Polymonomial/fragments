@@ -40,7 +40,8 @@ describe('GET /v1/fragments', () => {
     const postRes = await request(app)
       .post('/v1/fragments')
       .auth('user1@email.com', 'password1')
-      .send({ type: 'text/plain', data: 'hello' });
+      .type('text/plain')
+      .send('hello');
     expect(postRes.statusCode).toBe(201);
     expect(postRes.body.status).toBe('ok');
     const fragmentId = postRes.body.data.id;
