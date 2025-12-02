@@ -30,7 +30,9 @@ module.exports = (req, res) => {
       });
     }
     console.log('req.body type:', typeof req.body);
-    if (typeof req.body === 'string') {
+    if (type.startsWith('application/json')) {
+      data = JSON.stringify(req.body);
+    } else if (typeof req.body === 'string') {
       data = req.body;
     } else if (Buffer.isBuffer(req.body)) {
       data = req.body;

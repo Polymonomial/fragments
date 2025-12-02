@@ -21,6 +21,6 @@ user1@email.com:password1
 
 HTTP/1.1 200
 Content-Type: application/json; charset=utf-8
-Content-Length: 96
+Content-Length: 105
 [Asserts]
-body == `{"status":"ok","data":{"contentType":"application/json","size":19,"data":"This is a fragment!"}}`
+body == `{"status":"ok","data":{"contentType":"application/json","size":30,"data":{"data":"This is a fragment!"}}}`
