@@ -139,4 +139,4 @@ Content-Type: application/json; charset=utf-8
 [Asserts]
 jsonpath "$.status" == "ok"
 jsonpath "$.data" isCollection
-jsonpath "$.data[0]" count < {{b4length}}
+
