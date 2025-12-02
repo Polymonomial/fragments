@@ -34,7 +34,7 @@
         },
         {
           "name": "DYNAMODB_TABLE_NAME",
-          "value": "Fragments"
+          "value": "fragments"
         }
       ],
       "essential": true,
