@@ -87,7 +87,8 @@ class Fragment {
     // TODO
     const data = readFragmentdata(this.ownerId, this.id).then((datas) => {
       console.log('data retrieved in getData():', datas);
-      return Buffer.from(datas);
+      // If it's already a Buffer (for images), return as-is. Otherwise, convert from string
+      return Buffer.isBuffer(datas) ? datas : Buffer.from(datas);
     });
     return data;
   }
@@ -100,9 +101,11 @@ class Fragment {
   async setData(data) {
     // TODO
     // TIP: make sure you update the metadata whenever you change the data, so they match
-    const strDATA = data.toString();
-    this.size = Buffer.byteLength(strDATA);
-    await writeFragmentdata(this.ownerId, this.id, strDATA);
+    // For binary data (images), store as Buffer. For text, convert to string
+    const isImageType = this.type.startsWith('image/');
+    const storedData = isImageType && Buffer.isBuffer(data) ? data : data.toString();
+    this.size = Buffer.isBuffer(storedData) ? storedData.length : Buffer.byteLength(storedData);
+    await writeFragmentdata(this.ownerId, this.id, storedData);
     this.save();
   }
 
@@ -145,15 +148,15 @@ class Fragment {
       case 'application/yaml':
         return ['application/yaml', 'plain/text'];
       case 'image/png':
-        return ['image/png', 'image/jpg', 'image/ webp', 'image/avif', 'image/gif'];
-      case 'image/jpg':
-        return ['image/png', 'image/jpg', 'image/ webp', 'image/avif', 'image/gif'];
+        return ['image/png', 'image/jpeg', 'image/webp', 'image/avif', 'image/gif'];
+      case 'image/jpeg':
+        return ['image/png', 'image/jpeg', 'image/webp', 'image/avif', 'image/gif'];
       case 'image/webp':
-        return ['image/png', 'image/jpg', 'image/ webp', 'image/avif', 'image/gif'];
+        return ['image/png', 'image/jpeg', 'image/webp', 'image/avif', 'image/gif'];
       case 'image/avif':
-        return ['image/png', 'image/jpg', 'image/ webp', 'image/avif', 'image/gif'];
+        return ['image/png', 'image/jpeg', 'image/webp', 'image/avif', 'image/gif'];
       case 'image/gif':
-        return ['image/png', 'image/jpg', 'image/ webp', 'image/avif', 'image/gif'];
+        return ['image/png', 'image/jpeg', 'image/webp', 'image/avif', 'image/gif'];
       default:
         return [];
     }
