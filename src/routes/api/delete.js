@@ -1,4 +1,3 @@
-const { deleteFragment } = require('../../model/data/aws');
 const { Fragment } = require('../../model/fragment');
 const path = require('path');
 module.exports = async (req, res) => {
@@ -24,8 +23,8 @@ module.exports = async (req, res) => {
         .json({ status: 'error', error: { code: 404, message: 'Fragment not found!' } });
     }
 
-    await deleteFragment(ownerId, id);
-    res.status(200).json({ status: 'ok', message: 'Fragment deleted successfully' });
+    await Fragment.delete(ownerId, id);
+    return res.status(200).json({ status: 'ok', message: 'Fragment deleted successfully' });
   } catch (error) {
     console.error('Error fetching fragment:', error);
     res
