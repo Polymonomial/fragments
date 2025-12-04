@@ -52,6 +52,9 @@
     "pino": "^9.9.4",
     "pino-http": "^10.5.0",
     "pretty": "^2.0.0",
-    "stoppable": "^1.1.0"
+    "sharp": "^0.34.5",
+    "stoppable": "^1.1.0",
+    "turndown": "^7.2.2",
+    "yaml": "^2.8.2"
   }
 }
