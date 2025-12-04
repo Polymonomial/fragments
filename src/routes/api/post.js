@@ -36,7 +36,10 @@ module.exports = async (req, res) => {
       data = req.body;
     } else if (Buffer.isBuffer(req.body)) {
       data = req.body;
-      data = data.toString('utf8');
+      // Only convert to string for text-based content types, keep binary data as Buffer for images
+      if (!type.startsWith('image/')) {
+        data = data.toString('utf8');
+      }
     } else if (req.body && typeof req.body === 'object') {
       data = req.body.data;
     }
@@ -47,7 +50,9 @@ module.exports = async (req, res) => {
         .status(400)
         .json({ status: 'error', error: { code: 400, message: 'Missing data' } });
     }
-    const fragment = new Fragment({ ownerId: req.user, type, size: Buffer.byteLength(data) });
+    // Use .length for Buffer objects, Buffer.byteLength for strings
+    const size = Buffer.isBuffer(data) ? data.length : Buffer.byteLength(data);
+    const fragment = new Fragment({ ownerId: req.user, type, size });
     // Save the fragment to the database
     await fragment.save();
     await fragment.setData(data);
