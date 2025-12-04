@@ -34,7 +34,21 @@ describe('GET /v1/fragments', () => {
     expect(getRes.statusCode).toBe(200);
     console.log(getRes.body.data);
   });
+  // Using a valid username/password pair with wrong id should give a 404 result
+  test('authenticated users get 404 for non-existent fragment id', async () => {
+    const getRes = await request(app)
+      .get(`/v1/fragments/non_existent_id`)
+      .auth('user1@email.com', 'password1');
+    expect(getRes.statusCode).toBe(404);
+  });
 
+  // Test non-existent fragment with /info endpoint to cover line 23
+  test('authenticated users get 404 for non-existent fragment id with /info', async () => {
+    const getRes = await request(app)
+      .get(`/v1/fragments/non_existent_id/info`)
+      .auth('user1@email.com', 'password1');
+    expect(getRes.statusCode).toBe(404);
+  });
   // Using a valid username/password pair with specific fragment id should give a success result with a fragment object
   test('authenticated users get specific fragment with given fragment id', async () => {
     const postRes = await request(app)
@@ -67,7 +81,7 @@ describe('GET /v1/fragments', () => {
     expect(postRes.body.status).toBe('ok');
     const fragmentId = postRes.body.data.id;
     const getRes = await request(app)
-      .get(`/v1/fragments/${fragmentId}.md`)
+      .get(`/v1/fragments/${fragmentId}.html`)
       .auth('user1@email.com', 'password1');
     expect(getRes.body.status).toBe('ok');
     expect(getRes.statusCode).toBe(200);
