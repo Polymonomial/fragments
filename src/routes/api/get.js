@@ -311,16 +311,23 @@ module.exports = async (req, res) => {
       default:
         if (ext === '') {
           const fragmentdata = await fragment.getData();
-          let responseData = fragmentdata.toString();
+          let responseData;
 
-          // For JSON content, parse the string back to an object
+          // Handle different content types appropriately
           if (fragment.mimeType === 'application/json') {
             try {
-              responseData = JSON.parse(responseData);
+              responseData = JSON.parse(fragmentdata.toString());
             } catch (error) {
               // If parsing fails, return as string
               console.error('Failed to parse JSON fragment data:', error);
+              responseData = fragmentdata.toString();
             }
+          } else if (fragment.mimeType.startsWith('image/')) {
+            // For images, return as base64 encoded string
+            responseData = fragmentdata.toString('base64');
+          } else {
+            // For text-based content, return as string
+            responseData = fragmentdata.toString();
           }
 
           return res.status(200).json({

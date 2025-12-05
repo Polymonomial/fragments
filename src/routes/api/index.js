@@ -29,6 +29,7 @@ router.get('/fragments', require('./list'));
 // Other routes (POST, DELETE, etc.) will go here later on...
 router.post('/fragments', rawBody(), require('./post'));
 router.delete('/fragments/:id', require('./delete'));
+router.put('/fragments/:id', rawBody(), require('./update'));
 
 //router.get('/fragments', require('./getAll'));
 module.exports = router;
