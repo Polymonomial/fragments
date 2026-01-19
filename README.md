@@ -49,5 +49,9 @@ All routes are authenticated.
 
 ```http
 GET /v1/health
+```
+### GET methods
 
-### Health Check
+```http
+GET /v1/fragments/:id
+
