@@ -45,13 +45,46 @@ This project demonstrates backend API design, authentication, containerization, 
 
 All routes are authenticated.
 
-### Health Check
-
 ```http
+# Health check
 GET /v1/health
-```
-### GET methods
 
-```http
+# --------------------
+# GET methods
+# --------------------
+
+# List fragments (IDs by default)
+GET /v1/fragments
+
+# Get fragment data by id
 GET /v1/fragments/:id
 
+# Get fragment metadata by id
+GET /v1/fragments/:id/info
+
+# --------------------
+# POST methods
+# --------------------
+
+# Create a new fragment (raw body)
+POST /v1/fragments
+Content-Type: <mime-type>
+
+<raw fragment data>
+
+# --------------------
+# PUT methods
+# --------------------
+
+# Update an existing fragment (raw body)
+PUT /v1/fragments/:id
+Content-Type: <mime-type>
+
+<raw fragment data>
+
+# --------------------
+# DELETE methods
+# --------------------
+
+# Delete a fragment
+DELETE /v1/fragments/:id
